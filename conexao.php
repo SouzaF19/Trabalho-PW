@@ -1,13 +1,14 @@
 <?php
 
+
 $host = "localhost";
 $usuario = "root";
 $senha = "";
-$banco = "banco";
+$banco = "banco_pokemon";
 
-$conexao = mysqli_connect($host, $usuario, $senha, $banco);
+$conn = mysqli_connect($host, $usuario, $senha, $banco);
 
-if (!$conexao) {
+if (!$conn) {
     die("Erro na conexão");
 }
 
