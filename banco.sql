@@ -28,11 +28,6 @@ CREATE TABLE pokemon (
     FOREIGN KEY (id_raridade) REFERENCES raridade(id)
 );
 
-CREATE TABLE raridade (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL
-);
-
 CREATE TABLE carta
 (
     id INT PRIMARY KEY AUTO_INCREMENT,
