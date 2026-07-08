@@ -2,261 +2,134 @@
 
 session_start();
 
-if (!isset($_SESSION["admin"])) {
+include("conexao.php");
+
+
+// Proteção da página
+if(!isset($_SESSION["id"])){
     header("Location: index.php");
     exit();
 }
 
-include("conexao.php");
 
-// Pesquisa
-$pesquisa = "";
-
-if(isset($_GET["pesquisa"])){
-    $pesquisa = $_GET["pesquisa"];
-}
-
-$sql = "
-SELECT
-carta.id,
-pokemon.nome,
-pokemon.imagem_url,
-raridade.nome AS raridade,
-carta.quantidade
-
-FROM carta
-
-INNER JOIN pokemon
-ON carta.id_pokemon = pokemon.id
-
-INNER JOIN raridade
-ON carta.id_raridade = raridade.id
-
-WHERE pokemon.nome LIKE '%$pesquisa%'
-
-ORDER BY pokemon.nome
-";
+// Busca os Pokémon
+$sql = "SELECT * FROM pokemon ORDER BY numero_pokedex ASC";
 
 $resultado = mysqli_query($conn, $sql);
 
 ?>
 
 <!DOCTYPE html>
-
 <html lang="pt-br">
 
 <head>
-
-<meta charset="UTF-8">
-
-<title>Painel do Administrador</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-    background:#f2f2f2;
-}
-
-header{
-
-    background:#d32f2f;
-
-    color:white;
-
-    padding:20px;
-
-    text-align:center;
-
-}
-
-.container{
-
-    width:90%;
-
-    margin:30px auto;
-
-}
-
-.topo{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    margin-bottom:20px;
-
-}
-
-input{
-
-    padding:10px;
-
-    width:250px;
-
-}
-
-button{
-
-    padding:10px 15px;
-
-    cursor:pointer;
-
-}
-
-a{
-
-    text-decoration:none;
-
-}
-
-.card{
-
-    background:white;
-
-    margin-bottom:15px;
-
-    padding:15px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
-
-    border-radius:8px;
-
-}
-
-.card img{
-
-    width:90px;
-
-}
-
-.acoes{
-
-    margin-left:auto;
-
-}
-
-.acoes a{
-
-    margin-left:10px;
-
-}
-
-</style>
-
+    <meta charset="UTF-8">
+    <title>Painel Admin</title>
 </head>
 
 <body>
 
-<header>
-
 <h1>Painel Administrativo</h1>
 
-<p>Bem-vindo, <?php echo $_SESSION["nome"]; ?></p>
+<p>
+    Bem-vindo, <?php echo $_SESSION["nome"]; ?>
+</p>
 
-</header>
 
-<div class="container">
+<h2>Cadastrar Pokémon</h2>
 
-<div class="topo">
+<form action="salvar.php" method="POST">
 
-<form>
+    <label>ID:</label>
+    <input type="number" name="id" required>
 
-<input
-type="text"
-name="pesquisa"
-placeholder="Pesquisar Pokémon"
-value="<?php echo $pesquisa; ?>">
+    <br>
 
-<button>Pesquisar</button>
+    <label>Nome:</label>
+    <input type="text" name="nome" required>
+
+    <br>
+
+    <label>Número Pokedex:</label>
+    <input type="number" name="numero_pokedex" required>
+
+    <br>
+
+    <label>Tipo:</label>
+    <input type="text" name="tipo">
+
+    <br>
+
+    <label>Imagem URL:</label>
+    <input type="text" name="imagem_url">
+
+    <br>
+
+    <label>Descrição:</label>
+    <textarea name="descricao"></textarea>
+
+    <br>
+
+    <button type="submit">
+        Salvar Pokémon
+    </button>
 
 </form>
 
-<div>
 
-<a href="adicionar.php">
+<hr>
 
-<button>+ Adicionar Carta</button>
 
-</a>
+<h2>Pokémon cadastrados</h2>
 
-<a href="vitrine.php">
 
-<button>Ver Vitrine</button>
+<table border="1">
 
-</a>
+<tr>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>Número</th>
+    <th>Tipo</th>
+    <th>Imagem</th>
+    <th>Descrição</th>
+</tr>
 
-<a href="logout.php">
 
-<button>Sair</button>
+<?php while($pokemon = mysqli_fetch_assoc($resultado)){ ?>
 
-</a>
+<tr>
 
-</div>
+    <td>
+        <?php echo $pokemon["id"]; ?>
+    </td>
 
-</div>
+    <td>
+        <?php echo $pokemon["nome"]; ?>
+    </td>
 
-<?php
+    <td>
+        <?php echo $pokemon["numero_pokedex"]; ?>
+    </td>
 
-if(mysqli_num_rows($resultado) == 0){
+    <td>
+        <?php echo $pokemon["tipo"]; ?>
+    </td>
 
-    echo "<h3>Nenhuma carta cadastrada.</h3>";
+    <td>
+        <img src="<?php echo $pokemon["imagem_url"]; ?>" width="80">
+    </td>
 
-}
+    <td>
+        <?php echo $pokemon["descricao"]; ?>
+    </td>
 
-while($carta = mysqli_fetch_assoc($resultado)){
+</tr>
 
-?>
+<?php } ?>
 
-<div class="card">
 
-<img src="<?= $carta["imagem_url"] ?>">
+</table>
 
-<div>
-
-<h2><?= $carta["nome"] ?></h2>
-
-<p>Raridade: <?= $carta["raridade"] ?></p>
-
-<p>Quantidade: <?= $carta["quantidade"] ?></p>
-
-</div>
-
-<div class="acoes">
-
-<a href="editar.php?id=<?= $carta["id"] ?>">
-
-<button>Editar</button>
-
-</a>
-
-<a href="excluir.php?id=<?= $carta["id"] ?>">
-
-<button>Excluir</button>
-
-</a>
-
-</div>
-
-</div>
-
-<?php
-
-}
-
-?>
-
-</div>
 
 </body>
 
