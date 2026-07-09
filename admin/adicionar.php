@@ -12,12 +12,6 @@ if(!isset($_SESSION["id"])){
 }
 
 
-// Busca os Pokémon cadastrados
-$sql_pokemon = "SELECT id, nome FROM pokemon ORDER BY nome";
-
-$resultado_pokemon = mysqli_query($conn, $sql_pokemon);
-
-
 // Busca as raridades
 $sql_raridade = "SELECT id, nome FROM raridade ORDER BY nome";
 
@@ -44,27 +38,29 @@ $resultado_raridade = mysqli_query($conn, $sql_raridade);
 
 <form action="salvar_carta.php" method="POST">
 
+<option value="">
+Selecione um Pokémon
+</option>
 
 <label>Pokémon:</label>
 
 <br>
 
-<select name="id_pokemon" required>
+<input 
+type="text"
+id="pesquisaPokemon"
+placeholder="Digite o nome do Pokémon"
+autocomplete="off"
+required>
 
-<option value="">
-Selecione um Pokémon
-</option>
+
+<div id="resultadoPokemon"></div>
 
 
-<?php while($pokemon = mysqli_fetch_assoc($resultado_pokemon)){ ?>
-
-<option value="<?php echo $pokemon["id"]; ?>">
-
-<?php echo $pokemon["nome"]; ?>
-
-</option>
-
-<?php } ?>
+<input 
+type="hidden"
+name="id_pokemon"
+id="id_pokemon">
 
 
 </select>
@@ -139,6 +135,62 @@ Voltar
 
 </a>
 
+
+
+<script>
+    //Script usado para buscar os Pokémon cadastrados no banco de dados, igual pesquisa no Google.
+
+let campo = document.getElementById("pesquisaPokemon");
+
+
+campo.addEventListener("keyup", function(){
+
+
+    let nome = campo.value;
+
+
+    if(nome.length < 2){
+
+        document.getElementById("resultadoPokemon").innerHTML = "";
+
+        return;
+
+    }
+
+
+    fetch("../scripts/buscar_pokemon.php?nome=" + nome)
+
+
+    .then(resposta => resposta.text())
+
+
+    .then(dados => {
+
+        document.getElementById("resultadoPokemon").innerHTML = dados;
+
+    });
+
+
+});
+
+
+
+function escolher(id,nome){
+
+
+    document.getElementById("pesquisaPokemon").value = nome;
+
+
+    document.getElementById("id_pokemon").value = id;
+
+
+    document.getElementById("resultadoPokemon").innerHTML = "";
+
+
+}
+
+
+</script>
 
 </body>
 

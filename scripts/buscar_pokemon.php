@@ -1,8 +1,10 @@
 <?php
 
-include("conexao.php");
+include("../includes/conexao.php");
 
-$nome = $_GET["nome"];
+
+$nome = $_GET["nome"] ?? "";
+
 
 $sql = "
 
@@ -10,7 +12,7 @@ SELECT *
 
 FROM pokemon
 
-WHERE nome LIKE '%$nome%'
+WHERE nome LIKE ?
 
 ORDER BY nome
 
@@ -18,9 +20,28 @@ LIMIT 10
 
 ";
 
-$resultado = mysqli_query($conn,$sql);
 
-while($pokemon=mysqli_fetch_assoc($resultado)){
+$stmt = mysqli_prepare($conn, $sql);
+
+
+$pesquisa = "%" . $nome . "%";
+
+
+mysqli_stmt_bind_param(
+    $stmt,
+    "s",
+    $pesquisa
+);
+
+
+mysqli_stmt_execute($stmt);
+
+
+$resultado = mysqli_stmt_get_result($stmt);
+
+
+
+while($pokemon = mysqli_fetch_assoc($resultado)){
 
 ?>
 
@@ -35,6 +56,7 @@ onclick="escolher(
 <?= $pokemon["nome"] ?>
 
 </div>
+
 
 <?php
 
