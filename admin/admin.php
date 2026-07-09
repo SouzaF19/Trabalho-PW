@@ -45,16 +45,22 @@ $resultado = mysqli_query($conn, $sql);
 <head>
     <meta charset="UTF-8">
     <title>Painel Admin</title>
+
+    <link rel="stylesheet" href="../css/admin.css">
+    
 </head>
 
 <body>
 
-<h1>Painel Administrativo</h1>
+<h1>Sua Vitrine Pokemon</h1>
 
 <p>
     Bem-vindo, <?php echo $_SESSION["nome"]; ?>
 </p>
 
+<a href="logout.php" class="logout">
+    Sair
+</a>
 
 <h2>Gerenciar Cartas</h2>
 
@@ -74,7 +80,6 @@ $resultado = mysqli_query($conn, $sql);
 
 <table border="1">
 
-<th>ID</th>
 <th>Pokémon</th>
 <th>Imagem</th>
 <th>Raridade</th>
@@ -85,10 +90,6 @@ $resultado = mysqli_query($conn, $sql);
 <?php while($carta = mysqli_fetch_assoc($resultado)){ ?>
 
 <tr>
-
-    <td>
-        <?php echo $carta["id"]; ?>
-    </td>
 
     <td>
         <?php echo $carta["nome"]; ?>

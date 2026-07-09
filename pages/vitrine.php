@@ -142,7 +142,7 @@ value="<?php echo $pesquisa; ?>">
 
 <a href="../index.php">
 
-<button>Área do Administrador</button>
+<button>Fazer Login</button>
 
 </a>
 

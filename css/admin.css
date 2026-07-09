@@ -1,0 +1,159 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+
+body{
+
+    background:#f2f2f2;
+
+    padding:30px;
+
+}
+
+
+h1{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+
+h2{
+
+    margin-top:25px;
+
+    margin-bottom:15px;
+
+}
+
+
+/* Botão sair */
+
+.logout{
+
+    position:fixed;
+
+    top:15px;
+
+    left:15px;
+
+    background:#d32f2f;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:5px;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+}
+
+
+.logout:hover{
+
+    background:#b71c1c;
+
+}
+
+
+
+/* Botões */
+
+button{
+
+    background:#2ecc71;
+
+    color:white;
+
+    border:none;
+
+    padding:10px 15px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+}
+
+
+button:hover{
+
+    background:#27ae60;
+
+}
+
+
+
+/* Tabela */
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    margin-top:20px;
+
+}
+
+
+th{
+
+    background:#333;
+
+    color:white;
+
+    padding:12px;
+
+}
+
+
+td{
+
+    padding:10px;
+
+    text-align:center;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+
+td img{
+
+    width:80px;
+
+}
+
+
+
+/* Links */
+
+a{
+
+    text-decoration:none;
+
+}
+
+
+
+/* Área principal */
+
+.container{
+
+    width:90%;
+
+    margin:auto;
+
+}
