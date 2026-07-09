@@ -111,6 +111,12 @@ $resultado = mysqli_query($conn, $sql);
     <a href="editar.php?id=<?php echo $carta["id"]; ?>">
         Editar
     </a>
+    <br>
+    <a href="excluir.php?id=<?php echo $carta["id"]; ?>"
+    onclick="return confirm('Deseja excluir esta carta?');">
+
+        Excluir
+    </a>
 
 </td>
 
