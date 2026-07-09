@@ -20,13 +20,6 @@ if (isset($_SESSION['admin'])) {
 
 </head>
 
-<?php
-if(isset($_GET["erro"])){
-    echo "<p style='color:red;text-align:center;margin-bottom:15px;'>
-            Usuário ou senha incorretos.
-          </p>";
-}
-?>
 
 <body>
 
@@ -53,6 +46,18 @@ if(isset($_GET["erro"])){
         <button type="submit">
             Entrar
         </button>
+
+        <?php
+
+    // Caso haja erro de login
+    if(isset($_GET["erro"])){
+
+    echo "<p class='erro'>
+        Usuário ou senha incorretos. </p>";
+
+    }
+
+?>
 
     </form>
 

@@ -38,7 +38,7 @@ if(mysqli_num_rows($resultado) == 1){
 }
 
 // Caso dê erro
-header("Location: index.php?erro=1");
+header("Location: ../index.php?erro=1");
 exit();
 
 ?>
