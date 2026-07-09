@@ -1,6 +1,6 @@
 <?php
 
-include("conexao.php");
+include("../includes/conexao.php");
 
 $pesquisa = "";
 
@@ -140,7 +140,7 @@ value="<?php echo $pesquisa; ?>">
 
 </form>
 
-<a href="index.php">
+<a href="../index.php">
 
 <button>Área do Administrador</button>
 

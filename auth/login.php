@@ -2,7 +2,7 @@
 
 session_start();
 
-include("conexao.php");
+include("../includes/conexao.php");
 
 $usuario = $_POST["usuario"];
 $senha = $_POST["senha"];
@@ -30,7 +30,7 @@ if(mysqli_num_rows($resultado) == 1){
         $_SESSION["id"] = $usuario["id"];
         $_SESSION["nome"] = $usuario["nome"];
 
-        header("Location: admin.php");
+        header("Location: ../admin/admin.php");
         exit();
 
     }

@@ -1,9 +1,10 @@
 <?php
+include("includes/conexao.php");
 session_start();
 
 // Se o admin já estiver logado
 if (isset($_SESSION['admin'])) {
-    header("Location: admin.php");
+    header("Location: /admin/admin.php");
     exit();
 }
 ?>
@@ -140,7 +141,7 @@ if(isset($_GET["erro"])){
 
     <h1>Vitrine Pokémon</h1>
 
-    <form action="login.php" method="POST">
+    <form action="auth/login.php" method="POST">
 
         <label>Usuário</label>
 
@@ -166,7 +167,7 @@ if(isset($_GET["erro"])){
 
     <div class="visitar">
 
-        <a href="vitrine.php">
+        <a href="pages/vitrine.php">
             Apenas visualizar
         </a>
 

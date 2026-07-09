@@ -3,11 +3,11 @@
 session_start();
 
 if (!isset($_SESSION["admin"])) {
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 }
 
-include("conexao.php");
+include("../includes/conexao.php");
 
 // Recebe os dados do formulário
 $id_pokemon = $_POST["id_pokemon"];

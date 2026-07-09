@@ -2,12 +2,12 @@
 
 session_start();
 
-include("conexao.php");
+include("../includes/conexao.php");
 
 
 // Verifica login
 if(!isset($_SESSION["id"])){
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit();
 }
 
