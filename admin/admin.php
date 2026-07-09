@@ -79,6 +79,7 @@ $resultado = mysqli_query($conn, $sql);
 <th>Imagem</th>
 <th>Raridade</th>
 <th>Quantidade</th>
+<th>Ações</th>
 
 
 <?php while($carta = mysqli_fetch_assoc($resultado)){ ?>
@@ -104,6 +105,14 @@ $resultado = mysqli_query($conn, $sql);
     <td>
         <?php echo $carta["quantidade"]; ?>
     </td>
+
+    <td>
+
+    <a href="editar.php?id=<?php echo $carta["id"]; ?>">
+        Editar
+    </a>
+
+</td>
 
 </tr>
 
