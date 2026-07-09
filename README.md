@@ -88,10 +88,6 @@ Instale o XAMPP ou outro ambiente com:
 
 ### 2. Clonar o projeto
 
-```
-git clone https://github.com/seu-usuario/Trabalho-PW.git
-```
-
 ---
 
 ### 3. Configurar o banco
