@@ -148,7 +148,7 @@ campo.addEventListener("keyup", function(){
 
     let nome = campo.value;
 
-
+    // O usuário deve buscar pelo menos 2 caracteres para que a pesquisa seja realizada
     if(nome.length < 2){
 
         document.getElementById("resultadoPokemon").innerHTML = "";
