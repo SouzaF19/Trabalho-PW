@@ -42,77 +42,7 @@ $resultado = mysqli_query($conn, $sql);
 
 <title>Vitrine Pokémon</title>
 
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, Helvetica, sans-serif;
-}
-
-body{
-    background:#f2f2f2;
-}
-
-header{
-    background:#d32f2f;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
-
-.container{
-    width:90%;
-    margin:30px auto;
-}
-
-.topo{
-    display:flex;
-    justify-content:space-between;
-    margin-bottom:20px;
-}
-
-input{
-    padding:10px;
-    width:250px;
-}
-
-button{
-    padding:10px;
-}
-
-.card{
-
-    background:white;
-
-    padding:15px;
-
-    margin-bottom:15px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
-
-    border-radius:8px;
-
-}
-
-.card img{
-
-    width:90px;
-
-}
-
-a{
-
-    text-decoration:none;
-
-}
-
-</style>
+<link rel="stylesheet" href="../css/vitrine.css">
 
 </head>
 
