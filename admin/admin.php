@@ -12,8 +12,28 @@ if(!isset($_SESSION["id"])){
 }
 
 
-// Busca os Pokémon
-$sql = "SELECT * FROM pokemon ORDER BY numero_pokedex ASC";
+// Busca as cartas cadastradas
+$sql = "
+
+SELECT
+carta.id,
+pokemon.nome,
+pokemon.imagem_url,
+raridade.nome AS raridade,
+carta.quantidade
+
+FROM carta
+
+INNER JOIN pokemon
+ON carta.id_pokemon = pokemon.id
+
+INNER JOIN raridade
+ON carta.id_raridade = raridade.id
+
+ORDER BY pokemon.nome
+
+";
+
 
 $resultado = mysqli_query($conn, $sql);
 
@@ -36,91 +56,53 @@ $resultado = mysqli_query($conn, $sql);
 </p>
 
 
-<h2>Cadastrar Pokémon</h2>
+<h2>Gerenciar Cartas</h2>
 
-<form action="salvar.php" method="POST">
-
-    <label>ID:</label>
-    <input type="number" name="id" required>
-
-    <br>
-
-    <label>Nome:</label>
-    <input type="text" name="nome" required>
-
-    <br>
-
-    <label>Número Pokedex:</label>
-    <input type="number" name="numero_pokedex" required>
-
-    <br>
-
-    <label>Tipo:</label>
-    <input type="text" name="tipo">
-
-    <br>
-
-    <label>Imagem URL:</label>
-    <input type="text" name="imagem_url">
-
-    <br>
-
-    <label>Descrição:</label>
-    <textarea name="descricao"></textarea>
-
-    <br>
-
-    <button type="submit">
-        Salvar Pokémon
+<a href="adicionar.php">
+    <button>
+        Adicionar Carta
     </button>
+</a>
 
-</form>
 
 
 <hr>
 
 
-<h2>Pokémon cadastrados</h2>
+<h2>Cartas cadastradas</h2>
 
 
 <table border="1">
 
-<tr>
-    <th>ID</th>
-    <th>Nome</th>
-    <th>Número</th>
-    <th>Tipo</th>
-    <th>Imagem</th>
-    <th>Descrição</th>
-</tr>
+<th>ID</th>
+<th>Pokémon</th>
+<th>Imagem</th>
+<th>Raridade</th>
+<th>Quantidade</th>
 
 
-<?php while($pokemon = mysqli_fetch_assoc($resultado)){ ?>
+<?php while($carta = mysqli_fetch_assoc($resultado)){ ?>
 
 <tr>
 
     <td>
-        <?php echo $pokemon["id"]; ?>
+        <?php echo $carta["id"]; ?>
     </td>
 
     <td>
-        <?php echo $pokemon["nome"]; ?>
+        <?php echo $carta["nome"]; ?>
     </td>
 
     <td>
-        <?php echo $pokemon["numero_pokedex"]; ?>
+        <img src="<?php echo $carta["imagem_url"]; ?>" width="80">
     </td>
 
     <td>
-        <?php echo $pokemon["tipo"]; ?>
+        <?php echo $carta["raridade"]; ?>
     </td>
 
     <td>
-        <img src="<?php echo $pokemon["imagem_url"]; ?>" width="80">
-    </td>
-
-    <td>
-        <?php echo $pokemon["descricao"]; ?>
+        <?php echo $carta["quantidade"]; ?>
     </td>
 
 </tr>
