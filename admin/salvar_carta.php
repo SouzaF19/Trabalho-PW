@@ -26,6 +26,7 @@ $sql = "INSERT INTO carta (id_pokemon, id_raridade, quantidade)
 
 $stmt = mysqli_prepare($conn, $sql);
 
+// Evita SQL Injection
 mysqli_stmt_bind_param(
     $stmt,
     "iii",

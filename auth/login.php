@@ -24,6 +24,7 @@ if(mysqli_num_rows($resultado) == 1){
     $usuario = mysqli_fetch_assoc($resultado);
 
     // Verifica a senha
+    // Senha em texto puro (não recomendado)
     if($senha == $usuario["senha"]){
 
         $_SESSION["admin"] = true;
