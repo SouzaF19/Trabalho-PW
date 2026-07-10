@@ -16,7 +16,6 @@ $resposta = file_get_contents($url);
 $dados = json_decode($resposta, true);
 
 
-
 foreach($dados["results"] as $pokemon){
 
 
@@ -29,16 +28,12 @@ foreach($dados["results"] as $pokemon){
 
     $info = json_decode($detalhes, true);
 
-
-
     // Número da Pokédex
     $numero = $info["id"];
 
 
-
     // Imagem oficial
     $imagem = $info["sprites"]["front_default"];
-
 
 
     // Tipos
@@ -50,18 +45,12 @@ foreach($dados["results"] as $pokemon){
 
     }
 
-
     $tipo = implode(", ", $tipos);
-
-
 
     // Descrição inicial
     $descricao = "Pokémon número $numero da Pokédex.";
 
-
-
     // Inserir no banco
-
     $sql = "
 
     INSERT INTO pokemon
@@ -78,10 +67,7 @@ foreach($dados["results"] as $pokemon){
 
     ";
 
-
     $stmt = mysqli_prepare($conn,$sql);
-
-
 
     mysqli_stmt_bind_param(
 
@@ -98,11 +84,10 @@ foreach($dados["results"] as $pokemon){
 
     );
 
+    mysqli_stmt_execute($stmt);
+    
     $i++;
     echo"$i ";
-
-    mysqli_stmt_execute($stmt);
-
 }
 
 echo "Pokémon importados com sucesso!";
