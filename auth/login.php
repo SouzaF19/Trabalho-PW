@@ -7,7 +7,7 @@ include("../includes/conexao.php");
 $usuario = $_POST["usuario"];
 $senha = $_POST["senha"];
 
-// Procura o usuário
+// Procura o usuário, evitando SQL Injection
 $sql = "SELECT * FROM usuario WHERE usuario = ?";
 
 $stmt = mysqli_prepare($conn, $sql);

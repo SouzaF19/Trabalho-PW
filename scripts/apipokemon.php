@@ -103,11 +103,7 @@ foreach($dados["results"] as $pokemon){
 
     mysqli_stmt_execute($stmt);
 
-    
-
 }
-
-
 
 echo "Pokémon importados com sucesso!";
 
