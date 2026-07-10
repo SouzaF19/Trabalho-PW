@@ -54,10 +54,6 @@ $resultado = mysqli_query($conn, $sql);
 
 <h1>Sua Vitrine Pokemon</h1>
 
-<p>
-    Bem-vindo, <?php echo $_SESSION["nome"]; ?>
-</p>
-
 <a href="logout.php" class="logout">
     Sair
 </a>
